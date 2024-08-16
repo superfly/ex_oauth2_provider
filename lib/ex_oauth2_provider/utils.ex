@@ -15,6 +15,6 @@ defmodule ExOauth2Provider.Utils do
     opts
     |> Keyword.get(:size, 32)
     |> :crypto.strong_rand_bytes()
-    |> Base.encode16(case: :lower)
+    |> Base.url_encode64(padding: false)
   end
 end
