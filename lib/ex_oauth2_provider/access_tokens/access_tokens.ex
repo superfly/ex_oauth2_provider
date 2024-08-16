@@ -114,14 +114,14 @@ defmodule ExOauth2Provider.AccessTokens do
     now =
       config
       |> Config.access_token()
-      |> SchemaHelpers.__timestamp_for__(:inserted_at)
+      |> SchemaHelpers.__timestamp_for__(:created_at)
 
     scopes = maybe_build_scopes(application, scopes, config)
 
     queryable
     |> where([a], is_nil(a.revoked_at))
-    |> where([a], is_nil(a.expires_in) or datetime_add(a.inserted_at, a.expires_in, "second") > ^now)
-    |> order_by([a], desc: a.inserted_at, desc: :id)
+    |> where([a], is_nil(a.expires_in) or datetime_add(a.created_at, a.expires_in, "second") > ^now)
+    |> order_by([a], desc: a.created_at, desc: :id)
     |> Config.repo(config).all()
     |> Enum.filter(&is_accessible?/1)
     |> check_matching_scopes(scopes)

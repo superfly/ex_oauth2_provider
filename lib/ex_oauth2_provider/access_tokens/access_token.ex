@@ -118,7 +118,7 @@ defmodule ExOauth2Provider.AccessTokens.AccessToken do
   end
 
   defp gen_token(%{data: %struct{}} = changeset, config) do
-    created_at = Schema.__timestamp_for__(struct, :inserted_at)
+    created_at = Schema.__timestamp_for__(struct, :created_at)
 
     opts =
       changeset
