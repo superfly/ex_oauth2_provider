@@ -22,7 +22,7 @@ defmodule ExOauth2Provider.Token.Utils.Response do
               expires_in: access_token.expires_in,
               refresh_token: access_token.refresh_token,
               scope: access_token.scopes,
-              created_at: access_token.inserted_at
+              created_at: access_token.created_at
             } |> customize_access_token_response(access_token, config)
     {:ok, body}
   end
